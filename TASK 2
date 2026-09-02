@@ -1,0 +1,57 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+class Patient{
+	public:
+		int ID;
+		string Name;
+		int Score;
+		
+		Patient(){}
+		Patient(int I,string N, int S){
+			ID = I;
+			Name = N;
+			Score = S;
+		}
+};
+
+
+void InsertionSort(Patient *arr, int n){
+
+    for(int i=1;i<n;i++){
+        int Key = arr[i].Score;
+        int j=i;
+        while(j>0 && Key > arr[j-1].Score){
+            arr[j].Score = arr[j-1].Score;
+            j--;
+        }
+        arr[j].Score = Key;
+    }
+}
+
+
+int main(){
+	
+	int n;
+	cout<< "Enter No . of Patient: " << endl;
+	cin>> n;
+	Patient *Pat = new Patient[n];
+	
+	for (int i=0;i<n;i++){
+		string N;
+		int S;
+		cout<<"Enter Name: " << endl;
+		cin>> N;
+		cout<< "Enter Priority: " << endl;
+		cin>>S;
+		Pat[i] = Patient(i,N,S);
+	}
+	
+	InsertionSort(Pat,n);
+	cout << "Sorted: " << endl;
+	for (int i=0;i<n;i++){
+		cout<< "ID: " << Pat[i].ID << " Name: " <<Pat[i].Name << " Score: " << Pat[i].Score <<endl;
+	}
+	delete[] Pat;
+}
